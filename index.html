@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gate 11 | Bespoke Luxury Concierge</title>
+    <meta name="description" content="Gate 11 is India's elite concierge service, blending expert negotiation with seamless execution for a life without friction. Access the inaccessible.">
+    
+    <!-- SEO & Social Sharing -->
+    <meta property="og:title" content="Gate 11 | Beyond Access. Beyond Expectation.">
+    <meta property="og:description" content="India's elite concierge service. We handle the negotiations, the logistics, the impossible. You enjoy the result.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1542296791-cdd2b3954699?q=80&w=2832&auto=format&fit=crop">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⑪</text></svg>">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ------------------------- */
+        /* --- CSS VARIABLES & DEFAULTS --- */
+        /* ------------------------- */
+        :root {
+            --black: #000000;
+            --white: #FFFFFF;
+            --gray-dark: #111111;
+            --gray-medium: #999999;
+            --gray-light: #222222;
+            --accent-gradient: linear-gradient(135deg, var(--white), var(--gray-medium));
+            --accent-gradient-faded: rgba(255, 255, 255, 0.05);
+            --font-main: 'Inter', sans-serif;
+            --font-display: 'Sora', sans-serif;
+            --transition-fast: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-slow: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; background-color: var(--black); color: var(--white); }
+
+        body {
+            font-family: var(--font-main);
+            font-size: 16px;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            background-color: var(--black);
+            /* Subtle stripe-like vibrancy */
+            background-image: repeating-linear-gradient(-45deg, 
+                transparent, 
+                transparent 20px, 
+                rgba(255, 255, 255, 0.015) 20px, 
+                rgba(255, 255, 255, 0.015) 40px
+            );
+        }
+
+        body.mobile-nav-open { overflow: hidden; }
+        
+        /* ------------------------- */
+        /* --- UTILITY & HELPERS --- */
+        /* ------------------------- */
+        .container { width: 90%; max-width: 1280px; margin: 0 auto; }
+        .section { padding: 140px 0; border-bottom: 1px solid var(--gray-light); position: relative; }
+        
+        h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.2; font-weight: 700; }
+        
+        .gradient-text {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h1 { font-size: clamp(3.5rem, 7vw, 6rem); letter-spacing: -0.03em; color: var(--white); }
+        h2 { font-size: clamp(2.8rem, 5vw, 4.5rem); margin-bottom: 24px; text-align: center; }
+        h3 { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 20px; }
+        p { font-size: clamp(1rem, 1.5vw, 1.125rem); color: var(--gray-medium); max-width: 650px; }
+        .text-center { text-align: center; }
+        .text-center > p { margin-left: auto; margin-right: auto; margin-bottom: 80px; }
+
+        .btn {
+            display: inline-block; padding: 16px 36px; font-family: var(--font-main);
+            font-size: 1rem; font-weight: 600; text-decoration: none;
+            border-radius: 50px; transition: all 0.3s ease;
+            cursor: pointer; border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--white); color: var(--black);
+            box-shadow: 0 4px 15px rgba(255,255,255,0.1);
+        }
+        .btn-primary:hover {
+            background-color: var(--black); color: var(--white);
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 8px 25px rgba(150,150,150,0.1);
+            border-color: var(--white);
+        }
+
+        .btn-secondary {
+            background-color: transparent; color: var(--white);
+            border: 1px solid var(--gray-light);
+        }
+        .btn-secondary:hover { background-color: var(--white); color: var(--black); border-color: var(--white); }
+        
+        .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s var(--transition-slow), transform 0.8s var(--transition-slow); }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* ------------------------- */
+        /* --- HEADER & NAVIGATION --- */
+        /* ------------------------- */
+        .header {
+            position: fixed; top: 0; left: 0; width: 100%;
+            padding: 25px 0; z-index: 1000; transition: all 0.4s ease-in-out;
+        }
+        .header.scrolled {
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            padding: 15px 0; border-bottom: 1px solid var(--gray-light);
+        }
+        .nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.8rem; font-weight: 800; text-decoration: none; font-family: var(--font-display); }
+        .nav-links { display: flex; gap: 40px; align-items: center; }
+        .nav-links a { color: var(--gray-medium); text-decoration: none; font-weight: 500; transition: color var(--transition-fast); position: relative; padding-bottom: 5px; }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 0%; height: 1px; background: var(--accent-gradient); transition: width var(--transition-fast);
+        }
+        .nav-links a:hover { color: var(--white); }
+        .nav-links a:hover::after { width: 100%; }
+        /* Remove underline from button in nav */
+        .nav-links a.btn::after { display: none; }
+        .header .btn { padding: 12px 28px; }
+        .hamburger-menu { display: none; }
+        .mobile-nav { display: none; }
+
+        /* ------------------------- */
+        /* --- HERO SECTION --- */
+        /* ------------------------- */
+        #hero {
+            height: 100vh; min-height: 800px; display: flex;
+            align-items: center; justify-content: center; text-align: center;
+            position: relative; overflow: hidden; padding: 0;
+        }
+        #hero-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.15; }
+        .hero-content { z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 40px; }
+        .hero-content p { font-size: clamp(1.1rem, 2vw, 1.4rem); max-width: 750px; color: var(--gray-medium); }
+        h1.shimmer-text {
+            color: rgba(255, 255, 255, 0.9);
+            background: linear-gradient(100deg, rgba(255,255,255,0.4) 30%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.4) 70%);
+            background-size: 200% 100%; -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent; animation: shimmer 5s infinite linear;
+        }
+        @keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+
+        /* ------------------------- */
+        /* --- SERVICES SECTION --- */
+        /* ------------------------- */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .service-card {
+            background: transparent; padding: 40px 30px; border: 1px solid var(--gray-light);
+            border-radius: 16px; transition: all var(--transition-fast); position: relative;
+            overflow: hidden; background: linear-gradient(145deg, var(--gray-dark), var(--black));
+        }
+        .service-card:hover {
+            transform: translateY(-10px); border-color: var(--gray-medium);
+            box-shadow: 0 0 35px var(--accent-gradient-faded);
+        }
+        .service-icon { margin-bottom: 24px; }
+        .service-icon svg { width: 48px; height: 48px; }
+        .service-icon .gradient-text {
+             background: var(--accent-gradient);
+             -webkit-background-clip: text;
+             background-clip: text;
+             fill: url(#icon-gradient); /* For SVG fill */
+        }
+        .service-icon svg path { stroke: url(#icon-gradient); }
+
+        /* ------------------------- */
+        /* --- MEMBERSHIP SECTION --- */
+        /* ------------------------- */
+        #membership { background-color: transparent; }
+        .membership-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; align-items: stretch; }
+        .membership-card {
+            display: flex; flex-direction: column; background-color: var(--gray-dark);
+            padding: 40px; border-radius: 20px; border: 1px solid var(--gray-light);
+            transition: all var(--transition-fast); text-align: left;
+        }
+        .membership-card.highlight {
+            transform: scale(1.05); box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            background: linear-gradient(160deg, var(--gray-dark) 0%, #000 100%);
+            position: relative;
+        }
+        .membership-card.highlight::before { /* Gradient border effect */
+            content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 20px; padding: 1px;
+            background: var(--accent-gradient);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+        .tag {
+            display: inline-block; padding: 6px 14px; font-size: 0.8rem;
+            font-weight: 700; text-transform: uppercase; border-radius: 20px;
+            margin-bottom: 20px; text-align: center; align-self: flex-start;
+        }
+        .tag-standard { background-color: var(--gray-light); color: var(--gray-medium); }
+        .tag-highlight { background: var(--accent-gradient); color: var(--black); }
+        .membership-card h3 { font-size: 1.8rem; margin-bottom: 8px;}
+        .membership-card .price { font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 700; margin-bottom: 8px; font-family: var(--font-display); }
+        .membership-card .price span { font-size: 1rem; color: var(--gray-medium); font-weight: 400; }
+        .membership-card p { font-size: 0.9rem; margin-bottom: 30px; max-width: 100%; }
+        .perks-list { list-style: none; margin: 30px 0; padding-top: 30px; border-top: 1px solid var(--gray-light); flex-grow: 1; }
+        .perks-list li { margin-bottom: 15px; font-size: 1rem; display: flex; align-items: flex-start; gap: 12px; }
+        .perks-list li svg { flex-shrink: 0; margin-top: 5px; width: 16px; height: 16px; color: var(--white); }
+        .membership-card.highlight .perks-list li svg { color: var(--white); } /* Keep checkmarks consistent */
+        .membership-card .btn { width: 100%; margin-top: auto; }
+
+        /* ------------------------- */
+        /* --- CALLBACK TIMER SECTION --- */
+        /* ------------------------- */
+        .callback-section {
+            background: linear-gradient(45deg, var(--accent-gradient-faded), transparent);
+            border-radius: 20px; padding: 60px 40px;
+            display: flex; flex-direction: column; align-items: center;
+            text-align: center; border: 1px solid var(--gray-light);
+        }
+        .callback-section h3 { font-size: clamp(1.8rem, 4vw, 2.5rem); }
+        #countdown-timer {
+            font-family: var(--font-display); font-weight: 700;
+            font-size: clamp(2rem, 5vw, 3rem); margin: 20px 0; letter-spacing: 2px;
+        }
+        
+        /* ------------------------- */
+        /* --- Q&A SECTION --- */
+        /* ------------------------- */
+        .qna-container { max-width: 800px; margin: 0 auto; }
+        .qna-item { border-bottom: 1px solid var(--gray-light); }
+        .qna-question {
+            width: 100%; background: none; border: none; padding: 30px 0; text-align: left;
+            font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; color: var(--white);
+            display: flex; justify-content: space-between; align-items: center; cursor: pointer;
+        }
+        .qna-icon { transition: transform 0.4s ease; background: var(--accent-gradient); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-size: 2rem; }
+        .qna-item.active .qna-icon { transform: rotate(45deg); }
+        .qna-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out, padding 0.3s ease; }
+        .qna-answer p { padding-bottom: 30px; color: var(--gray-medium); max-width: 100%; }
+
+        /* ------------------------- */
+        /* --- FOOTER SECTION --- */
+        /* ------------------------- */
+        .footer { padding: 80px 0; background-color: var(--black); border-bottom: none; }
+        .footer-content { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .footer-logo { font-size: 2rem; margin-bottom: 20px; font-family: var(--font-display); }
+        .footer-links { display: flex; gap: 30px; margin-bottom: 30px; flex-wrap: wrap; }
+        .footer-links a { color: var(--gray-medium); text-decoration: none; transition: color var(--transition-fast); }
+        .footer-links a:hover { color: var(--white); }
+        .copyright { font-size: 0.9rem; color: var(--gray-medium); max-width: 100%; }
+        
+        /* ------------------------- */
+        /* --- RESPONSIVE DESIGN --- */
+        /* ------------------------- */
+        @media (max-width: 1024px) {
+            .membership-grid { grid-template-columns: 1fr; }
+            .membership-card { max-width: 500px; margin: 0 auto; }
+            .membership-card.highlight { transform: scale(1); }
+        }
+        @media (max-width: 768px) {
+            .section { padding: 100px 0; }
+            h2 { font-size: clamp(2.2rem, 10vw, 4rem); }
+            .text-center > p { margin-bottom: 60px; }
+            .nav-links { display: none; }
+            .hamburger-menu {
+                display: flex; flex-direction: column; justify-content: space-around;
+                width: 30px; height: 24px; background: transparent; border: none;
+                cursor: pointer; padding: 0; z-index: 1001; position: relative;
+            }
+            .hamburger-menu .bar {
+                width: 30px; height: 2px; background-color: var(--white);
+                border-radius: 10px; transition: all 0.3s linear;
+                position: relative; transform-origin: 1px;
+            }
+            .mobile-nav {
+                display: flex; flex-direction: column; justify-content: center; align-items: center;
+                background: var(--black); position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+                transform: translateY(-100%); transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+                z-index: 1000; opacity: 0; visibility: hidden;
+            }
+            .mobile-nav.active { transform: translateY(0); opacity: 1; visibility: visible; }
+            .mobile-nav a {
+                font-family: var(--font-display); font-size: 2rem; font-weight: 600;
+                color: var(--white); text-decoration: none; margin: 20px 0;
+                opacity: 0; transform: translateY(20px);
+                transition: opacity 0.4s ease, transform 0.4s ease;
+            }
+            .mobile-nav.active a { opacity: 1; transform: translateY(0); transition-delay: 0.4s; }
+            .hamburger-menu.open .bar:nth-child(1) { transform: rotate(45deg); }
+            .hamburger-menu.open .bar:nth-child(2) { opacity: 0; transform: translateX(20px); }
+            .hamburger-menu.open .bar:nth-child(3) { transform: rotate(-45deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- SVG Gradient Definition -->
+    <svg width="0" height="0" style="position:absolute">
+        <defs>
+            <linearGradient id="icon-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color: var(--white);" />
+                <stop offset="100%" style="stop-color: var(--gray-medium);" />
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="#hero" class="logo gradient-text">GATE ⑪</a>
+                <div class="nav-links">
+                    <a href="#services">Services</a>
+                    <a href="#membership">Membership</a>
+                    <a href="#qna">Q&A</a>
+                    <a href="#contact" class="btn btn-primary">Check Eligibility</a>
+                </div>
+                <button class="hamburger-menu" aria-label="Open menu">
+                    <div class="bar"></div> <div class="bar"></div> <div class="bar"></div>
+                </button>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="mobile-nav">
+        <a href="#services">Services</a>
+        <a href="#membership">Membership</a>
+        <a href="#qna">Q&A</a>
+        <a href="#contact" class="btn btn-primary" style="margin-top: 40px;">Check Eligibility</a>
+    </div>
+
+    <main>
+
+        <section id="hero">
+            <canvas id="hero-canvas"></canvas>
+            <div class="hero-content container">
+                <h1 class="shimmer-text fade-in">The Currency of Life is Time.</h1>
+                <p class="fade-in" style="transition-delay: 0.2s;">
+                    Gate 11 is India's elite private intelligence, engineering a life without friction for the nation's most discerning individuals. We don't just open doors; we build them for you.
+                </p>
+                <div class="fade-in" style="transition-delay: 0.4s;">
+                    <a href="#membership" class="btn btn-primary">Explore Membership</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="section">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="fade-in gradient-text">A Spectrum of Capability</h2>
+                    <p class="fade-in">Our service is a blank canvas, defined only by the scope of your ambition.</p>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card fade-in">
+                        <div class="service-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="url(#icon-gradient)"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 11.21 12.77 10.5 12 10.5s-1.536.71-2.121 1.256c-1.172.879-1.172 2.303 0 3.182z M12 6a7.5 7.5 0 100 15 7.5 7.5 0 000-15z" /></svg>
+                        </div>
+                        <h3>Strategic Acquisition</h3>
+                        <p>Leverage our expert haggling for superior deals on high-value assets: vehicles, real estate, art, and rare collectibles.</p>
+                    </div>
+                    <div class="service-card fade-in" style="transition-delay: 0.1s;">
+                        <div class="service-icon">
+                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="url(#icon-gradient)"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" /></svg>
+                        </div>
+                        <h3>Bespoke Journeys</h3>
+                        <p>From private aviation and yacht charters to curated itineraries with access to the world's most exclusive properties.</p>
+                    </div>
+                    <div class="service-card fade-in" style="transition-delay: 0.2s;">
+                        <div class="service-icon">
+                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="url(#icon-gradient)"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-12v.75m0 3v.75m0 3v.75m0 3V18m-3-12v.75m0 3v.75m0 3v.75M3 12h18M3 12a9 9 0 0118 0M3 12a9 9 0 0018 0m-9 6.75h.008v.008H12v-.008z" /></svg>
+                        </div>
+                        <h3>Priority Access</h3>
+                        <p>Front-row seats, sold-out events, Michelin-starred tables, and entry to the world's most private members' clubs.</p>
+                    </div>
+                    <div class="service-card fade-in" style="transition-delay: 0.3s;">
+                        <div class="service-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="url(#icon-gradient)"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" /></svg>
+                        </div>
+                        <h3>Lifestyle Logistics</h3>
+                        <p>Comprehensive management of your personal and professional life, freeing you to focus on what you do best.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="membership" class="section">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="fade-in gradient-text">Unlock Your Potential</h2>
+                    <p class="fade-in">One membership. Infinite possibilities. All plans include a 30-day money-back guarantee.</p>
+                </div>
+                <div class="membership-grid">
+                    <!-- Access Card -->
+                    <div class="membership-card fade-in" style="transition-delay: 0.2s;">
+                        <span class="tag tag-standard">Access</span>
+                        <h3>Access Tier</h3>
+                        <div class="price">₹10,000<span> / month</span></div>
+                        <p>The essential key to unlocking our world-class network and services.</p>
+                        <ul class="perks-list">
+                            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Dedicated Concierge Team (24/7)</li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Priority Access & Reservations</li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Bespoke Journey Curation</li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Monthly Lifestyle Newsletter</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-secondary">Choose Access</a>
+                    </div>
+                    <!-- Founder Card (Highlighted) -->
+                    <div class="membership-card highlight fade-in" style="transition-delay: 0.4s;">
+                        <span class="tag tag-highlight">Best Value</span>
+                        <h3 class="gradient-text">Founder Tier</h3>
+                        <div class="price gradient-text">₹50,000<span> / month</span></div>
+                        <p>The ultimate strategic advantage. For those who demand the absolute best.</p>
+                        <ul class="perks-list">
+                            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Personal Head Concierge (Direct Line)</li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg><b>Proprietary Negotiation Service</b></li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg><b>Guaranteed Best Price on Acquisitions</b></li>
+                             <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Private Aviation & Yacht Sourcing</li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>₹25,000 Monthly Lifestyle Credits</li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>All Elite & Access Tier Benefits</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-primary">Choose Founder</a>
+                    </div>
+                    <!-- Elite Card -->
+                    <div class="membership-card fade-in" style="transition-delay: 0.3s;">
+                        <span class="tag tag-standard">Elite</span>
+                        <h3>Elite Tier</h3>
+                        <div class="price">₹20,000<span> / month</span></div>
+                        <p>Enhanced access and proactive lifestyle management for the discerning professional.</p>
+                        <ul class="perks-list">
+                             <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Senior Concierge Team (24/7)</li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Strategic Acquisition Assistance</li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>Proactive Lifestyle Management</li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>₹5,000 Monthly Lifestyle Credits</li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>All Access Tier Benefits</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-secondary">Choose Elite</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="container fade-in">
+                <div class="callback-section">
+                     <h3 class="gradient-text">Ready to Begin?</h3>
+                     <p style="max-width: 500px; margin: 0 auto 20px auto;">Submit your application and our relationship director will contact you. Guaranteed.</p>
+                     <div id="callback-prompt">Get a call back in:</div>
+                     <div id="countdown-timer" class="gradient-text">30:00</div>
+                     <a href="#" id="apply-now-btn" class="btn btn-primary">Check Eligibility Now</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="qna" class="section">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="fade-in gradient-text">Frequently Asked Questions</h2>
+                </div>
+                <div class="qna-container fade-in">
+                    <div class="qna-item">
+                        <button class="qna-question">
+                            <span>What exactly is the 'Proprietary Negotiation Service'?</span>
+                            <span class="qna-icon">+</span>
+                        </button>
+                        <div class="qna-answer">
+                            <p>This is our signature service for Founder-tier members. Our in-house team of expert negotiators, with backgrounds in finance, law, and luxury goods, will act on your behalf to secure prices and terms that are unavailable to the general public. We leverage our network and data to guarantee a better deal on any significant acquisition, from real estate to a supercar, often saving you far more than the cost of membership.</p>
+                        </div>
+                    </div>
+                    <div class="qna-item">
+                        <button class="qna-question">
+                           <span>How does the 30-Day Money-Back Guarantee work?</span>
+                           <span class="qna-icon">+</span>
+                        </button>
+                        <div class="qna-answer">
+                            <p>Simple. If, for any reason, you are not completely satisfied with your membership within the first 30 days, we will refund your membership fee in full. No questions asked. We are confident in the value we provide and want you to be as well.</p>
+                        </div>
+                    </div>
+                    <div class="qna-item">
+                        <button class="qna-question">
+                            <span>Are there any hidden fees or commissions?</span>
+                            <span class="qna-icon">+</span>
+                        </button>
+                        <div class="qna-answer">
+                            <p>Absolutely not. Your membership fee is all-inclusive for our time, expertise, and management. For acquisitions, you only pay the negotiated price of the item or service itself. We never take a commission on the savings we generate for you; the value is entirely yours to keep. This transparent model ensures our only goal is to get you the best possible outcome.</p>
+                        </div>
+                    </div>
+                     <div class="qna-item">
+                        <button class="qna-question">
+                            <span>Is my privacy and data secure?</span>
+                            <span class="qna-icon">+</span>
+                        </button>
+                        <div class="qna-answer">
+                            <p>Discretion is the cornerstone of our service. All communication and data are protected by bank-level encryption. We operate on a strict need-to-know basis and have robust internal policies to ensure your absolute privacy. Your personal details and requests are treated with the utmost confidentiality.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo fade-in gradient-text">GATE ⑪</div>
+                <div class="footer-links fade-in">
+                    <a href="#">Discretion Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+                <p class="copyright fade-in">© 2025 Gate 11 Concierge. All Rights Reserved. When compromise is not an option.</p>
+            </div>
+        </div>
+    </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    // --- HEADER & MOBILE NAV ---
+    const header = document.querySelector('.header');
+    const hamburger = document.querySelector('.hamburger-menu');
+    const mobileNav = document.querySelector('.mobile-nav');
+    const body = document.querySelector('body');
+
+    window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 50));
+    
+    if (hamburger) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            mobileNav.classList.toggle('active');
+            body.classList.toggle('mobile-nav-open');
+        });
+        mobileNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('open');
+                mobileNav.classList.remove('active');
+                body.classList.remove('mobile-nav-open');
+            });
+        });
+    }
+
+    // --- INTERSECTION OBSERVER ---
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    
+    // --- HERO CANVAS ANIMATION ---
+    const canvas = document.getElementById('hero-canvas');
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let width, height, particles;
+        const resizeCanvas = () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = canvas.parentElement.offsetHeight;
+            particles = [];
+            let particleCount = (width * height) / 25000;
+            for (let i = 0; i < particleCount; i++) particles.push(new Particle());
+        };
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width; this.y = Math.random() * height;
+                this.size = Math.random() * 1.5; this.speedX = (Math.random() * 0.4 - 0.2);
+                this.speedY = (Math.random() * 0.4 - 0.2);
+            }
+            update() {
+                if (this.x > width || this.x < 0) this.speedX *= -1;
+                if (this.y > height || this.y < 0) this.speedY *= -1;
+                this.x += this.speedX; this.y += this.speedY;
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.7)'; ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+            }
+        }
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        animate();
+    }
+    
+    // --- Q&A ACCORDION ---
+    const qnaItems = document.querySelectorAll('.qna-item');
+    qnaItems.forEach(item => {
+        const question = item.querySelector('.qna-question');
+        const answer = item.querySelector('.qna-answer');
+        question.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
+            qnaItems.forEach(i => {
+                i.classList.remove('active');
+                i.querySelector('.qna-answer').style.maxHeight = '0px';
+            });
+            if (!isActive) {
+                item.classList.add('active');
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+            }
+        });
+    });
+
+    // --- COUNTDOWN TIMER ---
+    const countdownElement = document.getElementById('countdown-timer');
+    if (countdownElement) {
+        let timeInSeconds = 30 * 60;
+        const interval = setInterval(() => {
+            timeInSeconds--;
+            let minutes = Math.floor(timeInSeconds / 60);
+            let seconds = timeInSeconds % 60;
+            countdownElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            if (timeInSeconds <= 0) {
+                clearInterval(interval);
+                countdownElement.textContent = "00:00";
+                document.getElementById('callback-prompt').textContent = "The next callback slot opens soon."
+            }
+        }, 1000);
+    }
+    
+    // --- SMOOTH SCROLL FOR BUTTONS ---
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                // Flash effect for the contact section
+                if (targetId === '#contact') {
+                    const callbackSection = targetElement.querySelector('.callback-section');
+                    callbackSection.style.transition = 'outline 0.15s ease-in-out';
+                    callbackSection.style.outline = '2px solid var(--white)';
+                    setTimeout(() => callbackSection.style.outline = '1px solid var(--gray-light)', 1500);
+                }
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+});
+</script>
+
+</body>
+</html>
