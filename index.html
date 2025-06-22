@@ -458,7 +458,7 @@
                      <p style="max-width: 500px; margin: 0 auto 20px auto;">Submit your application and our relationship director will contact you. Guaranteed.</p>
                      <div id="callback-prompt">Get a call back in:</div>
                      <div id="countdown-timer" class="gradient-text">30:00</div>
-                     <a href="#" id="apply-now-btn" class="btn btn-primary">Check Eligibility Now</a>
+                     <a href="#" id="apply-now-btn" class="btn btn-primary" onclick="openForm()">Check Eligibility Now</a>
                 </div>
             </div>
         </section>
@@ -653,6 +653,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
+
+// --- NOTION FORM REDIRECT FUNCTION ---
+function openForm() {
+    window.open("https://stream-blade-8ad.notion.site/21a93dbb528280149e8ec7fa34026c32?pvs=105", "_blank");
+    
+    // Optional: Track the click for analytics
+    console.log("Form opened");
+}
 </script>
 
 </body>
